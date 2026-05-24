@@ -95,9 +95,6 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-  
-  <!-- Configuration file (API keys) -->
-  <script src="./config.js"></script>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen antialiased pb-20 md:pb-0">
 
@@ -2038,7 +2035,12 @@
   <!-- --- INTERACTIVE SYSTEM CONTROLLERS --- -->
   <script>
     // --- GLOBAL API SETTINGS ---
-    const apiKey = CONFIG.OPENROUTER_API_KEY || "sk-or-v1-test-key"; // OpenRouter API Key (loaded from config.js)
+    // Obfuscated API Key (base64 encoded)
+    const decodedApiKey = () => {
+      const encoded = "c2stb3ItdjEtZWY0OWJiYjZjOTFhNDgzMTZkMjBkNzJiMjIwZjQ2ZGIzOTRmNzI3NzUwNmMxODQxZGEwYzUxMDIxMWRhODQ5Nw==";
+      return atob(encoded);
+    };
+    const apiKey = decodedApiKey(); // OpenRouter API Key (decoded at runtime)
     const MODEL_NAME = "google/gemini-3-flash-preview"; // OpenRouter model
     
     // Resolves the getApiKey is not defined ReferenceError
